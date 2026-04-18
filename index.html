@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Los Compadres DSD – Mexican Candy Distributors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange:     #FF6B2B;
+    --orange-soft:#FF8C55;
+    --orange-pale:#FFF0E8;
+    --blue:       #2B8BFF;
+    --blue-soft:  #55A8FF;
+    --blue-pale:  #E8F3FF;
+    --white:      #FFFFFF;
+    --gray-light: #F7F8FA;
+    --gray-mid:   #E2E6EF;
+    --text-dark:  #1A1D2E;
+    --text-mid:   #5C6278;
+    --shadow-card: 0 8px 32px rgba(255,107,43,.13), 0 2px 8px rgba(43,139,255,.09);
+    --shadow-btn:  0 4px 18px rgba(255,107,43,.25);
+    --radius-pill: 50px;
+    --radius-card: 24px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    min-height: 100%;
+    background: var(--gray-light);
+    font-family: 'Nunito', sans-serif;
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── PHONE SHELL ─────────────────────────────────────── */
+  .phone-shell {
+    max-width: 420px;
+    margin: 0 auto;
+    min-height: 100dvh;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── HERO HEADER ─────────────────────────────────────── */
+  .hero {
+    background: linear-gradient(145deg, #FF6B2B 0%, #FF9A5C 55%, #2B8BFF 140%);
+    padding: 40px 24px 56px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Ccircle cx='60' cy='60' r='56' fill='none' stroke='rgba(255,255,255,.06)' stroke-width='12'/%3E%3C/svg%3E") repeat;
+    background-size: 90px 90px;
+    pointer-events: none;
+  }
+
+  /* floating candy emojis */
+  .floats {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .floats span {
+    position: absolute;
+    font-size: 22px;
+    opacity: .22;
+    animation: drift 7s ease-in-out infinite alternate;
+  }
+  .floats span:nth-child(1)  { top:8%;  left:6%;  animation-delay:0s;   font-size:20px; }
+  .floats span:nth-child(2)  { top:14%; left:80%; animation-delay:1.2s; font-size:18px; }
+  .floats span:nth-child(3)  { top:50%; left:4%;  animation-delay:2.1s; font-size:24px; }
+  .floats span:nth-child(4)  { top:55%; left:88%; animation-delay:0.7s; font-size:16px; }
+  .floats span:nth-child(5)  { top:78%; left:18%; animation-delay:3s;   font-size:20px; }
+  .floats span:nth-child(6)  { top:72%; left:72%; animation-delay:1.8s; font-size:22px; }
+
+  @keyframes drift {
+    from { transform: translateY(0) rotate(-8deg); }
+    to   { transform: translateY(-14px) rotate(8deg); }
+  }
+
+  .logo-badge {
+    width: 88px;
+    height: 88px;
+    border-radius: 26px;
+    background: rgba(255,255,255,.22);
+    backdrop-filter: blur(10px);
+    border: 2.5px solid rgba(255,255,255,.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 42px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.15);
+    animation: popIn .55s cubic-bezier(.34,1.56,.64,1) both;
+  }
+
+  @keyframes popIn {
+    from { transform: scale(.4); opacity: 0; }
+    to   { transform: scale(1);  opacity: 1; }
+  }
+
+  .hero h1 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -.3px;
+    text-shadow: 0 2px 12px rgba(0,0,0,.18);
+    animation: slideUp .5s .1s both;
+  }
+  .hero p.tagline {
+    font-size: 13.5px;
+    color: rgba(255,255,255,.88);
+    margin-top: 4px;
+    font-weight: 600;
+    letter-spacing: .3px;
+    animation: slideUp .5s .2s both;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(18px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+
+  /* ── WAVE DIVIDER ────────────────────────────────────── */
+  .wave {
+    display: block;
+    width: 100%;
+    margin-top: -2px;
+    line-height: 0;
+  }
+
+  /* ── CARD BODY ───────────────────────────────────────── */
+  .card-body {
+    flex: 1;
+    padding: 0 20px 28px;
+    margin-top: -28px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ── CONTACT STRIP ───────────────────────────────────── */
+  .contact-strip {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+
+  .contact-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 13px 10px;
+    border-radius: var(--radius-pill);
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform .18s, box-shadow .18s;
+    cursor: pointer;
+    border: none;
+    outline: none;
+  }
+  .contact-btn:active { transform: scale(.95); }
+
+  .btn-whatsapp {
+    background: linear-gradient(135deg, #25D366, #128C5E);
+    color: #fff;
+    box-shadow: 0 4px 18px rgba(37,211,102,.3);
+  }
+  .btn-email {
+    background: linear-gradient(135deg, var(--blue), var(--blue-soft));
+    color: #fff;
+    box-shadow: 0 4px 18px rgba(43,139,255,.28);
+  }
+
+  .contact-btn svg { flex-shrink: 0; }
+
+  /* ── SECTION LABEL ───────────────────────────────────── */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Baloo 2', cursive;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 14px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--gray-mid);
+  }
+
+  /* ── PRODUCT GRID ────────────────────────────────────── */
+  .product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .prod-btn {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+    padding: 18px 10px 16px;
+    border-radius: 20px;
+    font-family: 'Baloo 2', cursive;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-decoration: none;
+    border: 2px solid transparent;
+    background: var(--white);
+    box-shadow: var(--shadow-card);
+    transition: transform .18s cubic-bezier(.34,1.56,.64,1), box-shadow .18s;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  .prod-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    opacity: 0;
+    transition: opacity .2s;
+  }
+  .prod-btn:hover, .prod-btn:focus {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 14px 36px rgba(255,107,43,.2), 0 4px 12px rgba(43,139,255,.12);
+  }
+  .prod-btn:active { transform: scale(.95); }
+
+  /* individual tints */
+  .prod-btn.zamorana  { border-color: #FF6B2B33; background: linear-gradient(145deg,#fff9f6,#fff); }
+  .prod-btn.leon      { border-color: #FFB92233; background: linear-gradient(145deg,#fffbf0,#fff); }
+  .prod-btn.rio       { border-color: #2B8BFF33; background: linear-gradient(145deg,#f4f9ff,#fff); }
+  .prod-btn.jaru      { border-color: #FF6B9D33; background: linear-gradient(145deg,#fff4f8,#fff); }
+  .prod-btn.chocolates{ border-color: #7B4F2E33; background: linear-gradient(145deg,#fff8f4,#fff); }
+  .prod-btn.micheladas{ border-color: #25D36633; background: linear-gradient(145deg,#f4fff8,#fff); }
+
+  .prod-btn .emoji {
+    font-size: 34px;
+    line-height: 1;
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,.15));
+  }
+
+  .prod-btn .label { line-height: 1.2; }
+
+  .prod-btn .arrow {
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    font-size: 11px;
+    opacity: .45;
+  }
+
+  /* ── OWNER CARD ──────────────────────────────────────── */
+  .owner-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: linear-gradient(135deg, var(--orange-pale), var(--blue-pale));
+    border-radius: 18px;
+    padding: 16px 18px;
+    border: 1.5px solid var(--gray-mid);
+    margin-bottom: 18px;
+  }
+  .owner-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--orange), var(--blue));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(255,107,43,.25);
+  }
+  .owner-info h3 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-dark);
+  }
+  .owner-info p {
+    font-size: 12px;
+    color: var(--text-mid);
+    font-weight: 600;
+    margin-top: 1px;
+  }
+
+  /* ── FOOTER ──────────────────────────────────────────── */
+  .footer {
+    text-align: center;
+    font-size: 11.5px;
+    color: var(--text-mid);
+    padding-bottom: 8px;
+    opacity: .7;
+  }
+  .footer span { color: var(--orange); font-weight: 700; }
+
+</style>
+</head>
+<body>
+
+<div class="phone-shell">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="floats">
+      <span>🌶️</span><span>🍬</span><span>🍭</span><span>🌮</span><span>🎉</span><span>🍫</span>
+    </div>
+    <div class="logo-badge">🌶️</div>
+    <h1>Los Compadres DSD</h1>
+    <p class="tagline">🍭 Mexican Candy &amp; Specialty Distributors 🍫</p>
+  </div>
+
+  <!-- WAVE -->
+  <svg class="wave" viewBox="0 0 420 36" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,36 C70,0 140,36 210,18 C280,0 350,36 420,18 L420,0 L0,0 Z"
+          fill="url(#heroGrad)"/>
+    <defs>
+      <linearGradient id="heroGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%"   stop-color="#FF6B2B"/>
+        <stop offset="100%" stop-color="#2B8BFF"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- BODY -->
+  <div class="card-body">
+
+    <!-- Owner -->
+    <div class="owner-card">
+      <div class="owner-avatar">👤</div>
+      <div class="owner-info">
+        <h3>José Torres</h3>
+        <p>Vendor &amp; Direct Store Delivery</p>
+      </div>
+    </div>
+
+    <!-- Contact Buttons -->
+    <div class="contact-strip">
+      <a class="contact-btn btn-whatsapp" href="https://wa.link/nyp01z" >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.118.553 4.107 1.522 5.836L.057 23.571a.75.75 0 00.917.981l5.906-1.546A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-1.953 0-3.775-.55-5.32-1.501l-.381-.228-3.954 1.037 1.001-3.863-.249-.396A9.713 9.713 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/>
+        </svg>
+        WhatsApp
+      </a>
+      <a class="contact-btn btn-email" href="/cdn-cgi/l/email-protection#89c5e6faeae6e4f9e8edfbecfaedfaede3e6faecfdc9eee4e8e0e5a7eae6e4">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="3"/>
+          <polyline points="2,4 12,13 22,4"/>
+        </svg>
+        Email Us
+      </a>
+    </div>
+
+    <!-- Product Catalog -->
+    <div class="section-label">🛍️ Our Product Catalog</div>
+
+    <div class="product-grid">
+
+      <a class="prod-btn zamorana"
+         href="https://drive.google.com/file/d/1ZM2CPelgOi8wvPJJ9WWkRgibKtlIm1Ka/view?usp=drivesdk"
+         >
+        <span class="emoji">🌶️🍬</span>
+        <span class="label">La Zamorana</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a class="prod-btn leon"
+         href="https://drive.google.com/file/d/1c1eAefpVxraEMoERJT8aVh8wcmjm9aYL/view?usp=drivesdk"
+         >
+        <span class="emoji">🦁🍭</span>
+        <span class="label">El Súper León</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a class="prod-btn rio"
+         href="https://drive.google.com/file/d/1pQzm89J4-9Bl9RgU1Av1yMSyr-QGHxM-/view?usp=drivesdk"
+         >
+        <span class="emoji">🌊🍡</span>
+        <span class="label">Del Río</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a class="prod-btn jaru"
+         href="https://drive.google.com/file/d/1B66xohTB2QwF9uDuXMdx9FwvqAMXEliI/view?usp=drivesdk"
+         >
+        <span class="emoji">🧸🎯</span>
+        <span class="label">Juguetes Jaru</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a class="prod-btn chocolates"
+         href="https://drive.google.com/file/d/1q2bsNI3wIAQxPGchE1lJQiojZtCwTXJ0/view?usp=drivesdk"
+         >
+        <span class="emoji">🍫🍩</span>
+        <span class="label">Chocolates</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a class="prod-btn micheladas"
+         href="https://drive.google.com/file/d/10aeRQtRnASeUkVxtLMroyJvldPi2EfHU/view?usp=drivesdk"
+         >
+        <span class="emoji">🍺🌶️</span>
+        <span class="label">Micheladas</span>
+        <span class="arrow">›</span>
+      </a>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      Tap any category to view the full product catalog<br>
+      <span>Los Compadres DSD</span> · Colorado, USA 🇲🇽
+    </div>
+
+  </div><!-- /card-b
